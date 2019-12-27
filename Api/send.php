@@ -1,11 +1,6 @@
 <?php
 require_once('../funcs.php');
-
-use  http\Client\Request;
-
-$request = new Request();
-$request->getQuery();
-dd($request->getQuery());
+dd($_GET['username']);
 $db->insertUserByUsername('username', [
     'username' => "09361722174",
     'access_token' => bin2hex(openssl_random_pseudo_bytes(64)),
