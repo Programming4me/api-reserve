@@ -8,6 +8,6 @@ $db->insert('users', [
 ]);
 $arr = [
     'status' => true,
-    'data' => [$db]
+    'data' => [$db->select('users')]
 ];
 echo json_encode($arr);
