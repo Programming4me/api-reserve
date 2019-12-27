@@ -1,13 +1,13 @@
 <?php
 /*
 * simple class for mysql
-* writer : @LordDeveloper
+* writer : @programming4
 * Language : PHP
 */
 
 require_once('funcs.php');
 
-class Database extends mysqli
+class Database extends PDO
 {
     public static $instance;
     public static $messages = [
@@ -52,6 +52,7 @@ class Database extends mysqli
     public function fetch_all($mysqli_result)
     {
         if (!$mysqli_result) return false;
+        return $mysqli_result->fetchAll(\PDO::FETCH_ASSOC);
         $rows = [];
         while ($row = $mysqli_result->fetch_assoc()) $rows[] = $row;
         return $rows;

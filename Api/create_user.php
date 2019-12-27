@@ -12,8 +12,7 @@ $result = $db->insertUserByUsername('username', [
 
 $arr = [
     'status' => true,
-    'data' =>
-        array_combine($db->select('users')->fetch_fields(), $db->select('users')->fetch_array())
+    'data' => $db->fetch_all(\PDO::FETCH_ASSOC)
     ,
 ];
 
