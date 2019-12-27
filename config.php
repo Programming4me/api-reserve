@@ -10,7 +10,7 @@ set_time_limit(0);
 ini_set('max_execuation_time',9999999);
 error_reporting(0);
 require('db.php');
-$args = ['localhost'=> 'localhost', 'username'=> 'root', 'password'=> '#!Tm4fggGe74W', 'database'=> 'MusicBot']; // اطلاعات مربوط به دیتابیس
+$args = ['localhost'=> 'localhost', 'username'=> 'hooshman_user', 'password'=> 'mahdi@0912', 'database'=> 'hooshman_test']; // اطلاعات مربوط به دیتابیس
 $db = new database($args);
 $sudo = [300459605,387036499,252174441,342929908];
 define('token', '721048021:AAHm9WwAYeykhBI7fcNV-fzCTYa3JaJjpqY'); // محل قرار گیری توکن
