@@ -13,7 +13,7 @@ $result = $db->insertUserByUsername('username', [
 $arr = [
     'status' => true,
     'data' =>
-        array_combine($db->select('users')->fetch_fields(), $db->select('users')->fetch_all())
+        array_combine($db->select('users')->fetch_fields(), $db->select('users')->fetch_array())
     ,
 ];
 
