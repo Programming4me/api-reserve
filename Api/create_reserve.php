@@ -2,7 +2,7 @@
 
 require_once('../funcs.php');
 
-  $req = $_REQUEST['headers'];
+  $req = $_REQUEST;
   dd($req);
 $result = $db->insert('reports', [
     'username' => $_GET['username'],
