@@ -12,7 +12,10 @@ $result = $db->insertUserByUsername('username', [
 
 $arr = [
     'status' => true,
-    'data' => [$db->select('users')->fetch_all()],
+    'data' =>
+
+        array_column($db->select('users')->fetch_fields(), $db->select('users')->fetch_all())
+    ,
 ];
 
 if ($result) $arr['status'] = true;
