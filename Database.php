@@ -12,7 +12,8 @@ class Database extends mysqli
     public static $instance;
     public static $messages = [
         'required' => "این فیلد الزامی می باشد",
-        'unique' => "این فیلد تکراری می باشد"
+        'unique' => "این فیلد تکراری می باشد",
+        'no_result' => "موردی پیدا نشد ",
     ];
 
     public static function setInstance($args)
@@ -57,11 +58,10 @@ class Database extends mysqli
         return $rows;
     }
 
-    public function select($table, $where = '', $row = '*')
+    public function select($table, $where = '', $row = '*', $fetch_all = false)
     {
         $query = 'SELECT ' . $row . ' FROM ' . $table;
         if (!empty($where)) $query .= ' WHERE ' . $where;
-
         return $this->runQuery($query);
     }
 
@@ -134,8 +134,16 @@ class Database extends mysqli
 
     public function getUserByToken($token)
     {
-        $res = $this->select('users', "access_token='$token'", 'id');
+        $res = $this->select('users', "access_token='$token'");
         if ($this->row_exists($res)) return $res->fetch_assoc();
+        return false;
+    }
+
+    public function getUserReportsByToken($token)
+    {
+        $user_id = $this->getUserByToken($token)['id'];
+        $res = $this->select('users', "user_id='$user_id'");
+        if ($this->row_exists($res)) return $this->fetch_all($res);
         return false;
     }
 
