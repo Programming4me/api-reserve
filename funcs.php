@@ -144,7 +144,7 @@ function dd($var, $pretty = false)
  */
 function getMessage($validationType, $field = "", $table = "")
 {
-    $messages = Database::$instance->messages;
+    $messages = Database::$messages;
     dd($messages);
     return $messages[$validationType];
 }

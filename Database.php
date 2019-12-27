@@ -10,6 +10,10 @@ require_once('funcs.php');
 class Database extends mysqli
 {
     public static $instance;
+    public static $messages = [
+        'required' => "این فیلد الزامی می باشد",
+        'unique' => "این فیلد تکراری می باشد"
+    ];
 
     public static function setInstance($args)
     {
@@ -17,10 +21,7 @@ class Database extends mysqli
         return self::$instance;
     }
 
-    public static $messages = [
-        'required' => "این فیلد الزامی می باشد",
-        'unique' => "این فیلد تکراری می باشد"
-    ];
+
     public $errors = [];
 
     public function __construct($db = [])
