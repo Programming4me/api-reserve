@@ -54,7 +54,7 @@ class Database extends mysqli
     public function insert($table = '', array $array = [])
     {
         $query = 'INSERT INTO `' . $table . '` (' . implode(',', array_keys($array)) . ') VALUES (\'' . implode("','", array_values($array)) . '\')';
-       dd($query);
+       dd($query,true);
         return $this->runQuery($query);
     }
 
