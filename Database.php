@@ -52,7 +52,6 @@ class Database extends mysqli
     public function fetch_all($mysqli_result)
     {
         if (!$mysqli_result) return false;
-        return $mysqli_result->fetchAll(\PDO::FETCH_ASSOC);
         $rows = [];
         while ($row = $mysqli_result->fetch_assoc()) $rows[] = $row;
         return $rows;
