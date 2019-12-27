@@ -13,12 +13,13 @@ $result = $db->insertUserByUsername('username', [
 if ($result)
     $arr = [
         'status' => true,
-        'data' => [$db->select('users')->fetch_all()]
+        'data' => [$db->select('users')->fetch_assoc()],
+        'message' => getMessage('unique')
     ];
 else
     $arr = [
         'status' => false,
-        'data' => [$db->select('users')->fetch_all()]
+        'data' => [$db->select('users')->fetch_assoc()]
     ];
 
 echo json_encode($arr);

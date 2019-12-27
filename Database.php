@@ -9,6 +9,18 @@ require_once('funcs.php');
 
 class Database extends mysqli
 {
+    public static $instance;
+
+    public static function setInstance($args)
+    {
+        if (!self::$instance) return new Database($args);
+        return self::$instance;
+    }
+
+    public static $messages = [
+        'required' => "این فیلد الزامی می باشد",
+        'unique' => "این فیلد تکراری می باشد"
+    ];
     public $errors = [];
 
     public function __construct($db = [])
@@ -121,8 +133,8 @@ class Database extends mysqli
 
     public function getUserByToken($token)
     {
-        $res = $this->select('users', "access_token='$token'",'id');
-        if ($this->row_exists($res))  return $res->fetch_assoc();
+        $res = $this->select('users', "access_token='$token'", 'id');
+        if ($this->row_exists($res)) return $res->fetch_assoc();
         return false;
     }
 

@@ -5,7 +5,7 @@
 require_once('Database.php');
 
 $args = ['localhost' => 'localhost', 'username' => 'hooshman_user', 'password' => 'mahdi@0913', 'database' => 'hooshman_test']; // اطلاعات مربوط به دیتابیس
-$db = new Database($args);
+$db = Database::setInstance($args);
 
 function create_hash($length = 7)
 {
@@ -133,4 +133,17 @@ function dd($var, $pretty = false)
     ($pretty) ? print_r($var) : var_dump($var);
     echo "</pre>\n";
     die;
+}
+
+/**
+ * give the validation message with some additional data.
+ *
+ * @param string $field
+ * @param string $table
+ * @param string $validationType
+ */
+function getMessage($validationType, $field = "", $table = "")
+{
+    $messages = Database::$instance->messages;
+    return $messages[$validationType];
 }
