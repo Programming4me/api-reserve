@@ -11,15 +11,19 @@ $result = $db->insert('reports', [
     'end_time' => $_GET['end_time'],
 ]);
 
-if ($result)
-    $arr = [
-        'status' => true,
-        'data' => [$db->select('reports')->fetch_all()]
-    ];
-else
-    $arr = [
-        'status' => false,
-        'data' => [$db->select('reports')->fetch_all()]
-    ];
+$arr = [
+    'status' => true,
+    'data' => [
+        'reserves' => $db->fetch_all($db->select('reports')->fetch_all())
+    ],
+    'message' => null
+];
+
+if ($result) $arr['status'] = true;
+
+else {
+    $arr['status'] = false;
+    $arr['message'] = getMessage('required');
+}
 
 echo json_encode($arr);

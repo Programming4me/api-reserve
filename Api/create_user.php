@@ -12,7 +12,8 @@ $result = $db->insertUserByUsername('username', [
 
 $arr = [
     'status' => true,
-    'data' => $db->fetch_all($db->select('users'))
+    'data' => $db->fetch_all($db->select('users')),
+    'message' => null
 ];
 
 if ($result) $arr['status'] = true;
