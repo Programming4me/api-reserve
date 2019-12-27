@@ -3,9 +3,9 @@
 require_once('../funcs.php');
 
 $req = $_REQUEST;
-$user = $db->getUserByToken(getallheaders()['token']);
+$user_id = $db->getUserByToken(getallheaders()['token']);
 $result = $db->insert('reports', [
-    'user_id' => $user->id,
+    'user_id' => $user_id,
     'start_time' => $_GET['start_time'],
     'end_time' => $_GET['end_time'],
 ]);
