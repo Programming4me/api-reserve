@@ -7,7 +7,7 @@
 
 require_once('funcs.php');
 
-class Database extends PDO
+class Database extends mysqli
 {
     public static $instance;
     public static $messages = [
