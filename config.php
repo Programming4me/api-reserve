@@ -12,7 +12,7 @@ error_reporting(0);
 require('db.php');
 $args = ['localhost'=> 'localhost', 'username'=> 'hooshman_user', 'password'=> 'mahdi@0912', 'database'=> 'hooshman_test']; // اطلاعات مربوط به دیتابیس
 $db = new database($args);
-echo $db;
+return $db;
 $sudo = [300459605,387036499,252174441,342929908];
 define('token', '721048021:AAHm9WwAYeykhBI7fcNV-fzCTYa3JaJjpqY'); // محل قرار گیری توکن
 define('logs',-1001275244057); // محل قرار گیری آیدی گروه
