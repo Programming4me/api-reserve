@@ -12,7 +12,7 @@ $result = $db->insertUserByUsername('username', [
 
 $arr = [
     'status' => true,
-    'data' => $db->select('users')->fetch_all()
+    'data' => mysqli_fetch_all( $db->select('users'))
 ];
 
 if ($result) $arr['status'] = true;
