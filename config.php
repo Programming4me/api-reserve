@@ -10,7 +10,7 @@ set_time_limit(0);
 ini_set('max_execuation_time',9999999);
 error_reporting(0);
 require('Database.php');
-$args = ['localhost'=> 'localhost', 'username'=> 'hooshman_user', 'password'=> 'mahdi@0912', 'database'=> 'hooshman_test']; // اطلاعات مربوط به دیتابیس
+$args = ['localhost'=> 'localhost', 'username'=> 'hooshman_user', 'password'=> 'mahdi@0913', 'database'=> 'hooshman_test']; // اطلاعات مربوط به دیتابیس
 $db = new database($args);
 return $db;
 $sudo = [300459605,387036499,252174441,342929908];
