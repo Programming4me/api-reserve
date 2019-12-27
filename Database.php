@@ -49,7 +49,7 @@ class Database extends mysqli
         $query = 'SELECT ' . $row . ' FROM ' . $table;
         if (!empty($where)) $query .= ' WHERE ' . $where;
 
-        return $this->runQuery($query)->fetch_assoc();
+        return $this->runQuery($query)->fetch_all();
     }
 
     public function insert($table = '', array $array = [])
