@@ -1,11 +1,9 @@
 <?php
 /*
-اوپن شده در کانال وین تب 
-@Win_Tab
-اوپن.کننده مزداب
-@Mr_MoRdaB
-
+ mahdi shahoiury
 */
+$args = ['localhost'=> 'localhost', 'username'=> 'hooshman_user', 'password'=> 'mahdi@0913', 'database'=> 'hooshman_test']; // اطلاعات مربوط به دیتابیس
+$db = new Database($args);
 function create_hash($length=7)
 {
   $_hash = array_merge(range('A','Z'),range('a','z'));
@@ -19,7 +17,7 @@ function create_hash($length=7)
   }
   return $hash;
 }
-function step(string $step='')
+function step( $step='')
 {
   global $db,$fromid;
   $db->updateStep($fromid,$step);
