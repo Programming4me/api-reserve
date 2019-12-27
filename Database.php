@@ -32,7 +32,7 @@ class Database extends mysqli
     }
 
   }
-  public function update(string $table='',array $array=[] , string $where='')
+  public function update( $table='',array $array=[] ,  $where='')
   {
       $query = 'UPDATE `'.$table.'` SET ';
       $string = '';
@@ -45,20 +45,20 @@ class Database extends mysqli
       if(!is_null($where)) $query .= ' WHERE '.$where;
       return $this->runQuery($query);
   }
-  public function insert(string $table='',array $array=[] )
+  public function insert( $table='',array $array=[] )
   {
       $query = 'INSERT INTO `'.$table.'` (' .implode(',',array_keys($array)) .') VALUES (\''.implode("','",array_values($array)).'\')';
 
       return $this->runQuery($query);
   }
-  public function select(string $table,string $where='',string $row='*')
+  public function select( $table, $where='', $row='*')
   {
       $query = 'SELECT '.$row.' FROM '.$table;
       if(!empty($where)) $query .= ' WHERE '.$where;
 
       return $this->runQuery($query);
   }
-  public function create(string $table,array $cloumns =[])
+  public function create( $table,array $cloumns =[])
   {
       $query = 'CREATE TABLE IF NOT EXISTS '.$table.'(' .rtrim(implode(',',$cloumns),',') .')';
 
@@ -72,7 +72,7 @@ class Database extends mysqli
     while($row=$mysqli_result->fetch_assoc()) $rows[] = $row;
     return $rows;
   }
-  public function search(string $str='')
+  public function search( $str='')
   {
     $words = explode(' ',$str);
     $query = "SELECT * FROM `sounds` WHERE ";
@@ -88,32 +88,32 @@ class Database extends mysqli
     if($this->row_exists($result)) return $this->fetch_all($result);
     return false;
   }
-  public function delete(string $table='',string $where='')
+  public function delete( $table='', $where='')
   {
     $query = 'DELETE FROM '.$table.' ';
     if(!empty($where)) $query .= 'WHERE '.$where;
 
     return $this->runQuery($query);
   }
-  public function insertUser(int $userid)
+  public function insertUser( $userid)
   {
     $res = $this->select('users',"user_id='$userid'");
     if(!$this->row_exists($res)) return $this->insert('users',['user_id'=> $userid]);
     return false;
   }
-  public function getMp3Likes(string $hash)
+  public function getMp3Likes( $hash)
   {
     $res = $this->select('sounds',"hash='$hash'");
     if($this->row_exists($res)) return $res->fetch_assoc()['likes'];
     return false;
   }
-  public function getMp3Dislikes(string $hash)
+  public function getMp3Dislikes( $hash)
   {
     $res = $this->select('sounds',"hash='$hash'");
     if($this->row_exists($res)) return $res->fetch_assoc()['dislikes'];
     return false;
   }
-  public function likeMp3(string $hash, int $userid)
+  public function likeMp3( $hash,  $userid)
   {
     $res = $this->select('dislikes',"user_id='$userid' AND hash='$hash'");
     $dislikes = $this->getMp3disLikes($hash);
@@ -130,7 +130,7 @@ class Database extends mysqli
     }
     return false;
   }
-  public function dislikeMp3(string $hash, int $userid)
+  public function dislikeMp3( $hash,  $userid)
   {
     $res = $this->select('likes',"user_id='$userid' AND hash='$hash'");
     $likes = $this->getMp3Likes($hash);
@@ -147,19 +147,19 @@ class Database extends mysqli
     }
     return false;
   }
-  public function addToDownloadList(string $hash,int $userid)
+  public function addToDownloadList( $hash, $userid)
   {
     $res = $this->select('downloads',"user_id='$userid' AND hash='$hash'");
     if(!$this->row_exists($res)) return $this->insert('downloads',['user_id'=> $userid,'hash'=> $hash]);
     return false;
   }
-  public function getDownloadsCount(string $hash)
+  public function getDownloadsCount( $hash)
   {
     $res = $this->select('sounds',"hash='$hash'");
     if($this->row_exists($res)) return $res->fetch_assoc()['downloads'];
     return false;
   }
-  public function addMp3DownloadCount(string $hash)
+  public function addMp3DownloadCount( $hash)
   {
     $res = $this->select('sounds',"hash='$hash'");
     $downloads = $this->getDownloadsCount($hash);
@@ -186,40 +186,40 @@ class Database extends mysqli
     if($this->row_exists($res)) return $this->fetch_all($res);
     return false;
   }
-  public function getRecentlyDownloads(int $userid)
+  public function getRecentlyDownloads( $userid)
   {
     $res = $this->runQuery("SELECT * FROM `downloads` LEFT JOIN `sounds` ON sounds.hash = downloads.hash WHERE user_id=$userid ORDER BY downloads.id DESC");
     if($this->row_exists($res)) return $this->fetch_all($res);
     return false;
   }
-  public function getUserLiked(int $userid)
+  public function getUserLiked( $userid)
   {
     $res = $this->runQuery("SELECT * FROM `likes` LEFT JOIN `sounds` ON sounds.hash = likes.hash WHERE user_id=$userid ORDER BY likes.id DESC");
     if($this->row_exists($res)) return $this->fetch_all($res);
     return false;
   }
-  public function getUserFavorites(int $userid)
+  public function getUserFavorites( $userid)
   {
     $res = $res = $this->runQuery("SELECT * FROM `favorites` LEFT JOIN `sounds` ON sounds.hash = favorites.hash WHERE user_id=$userid ORDER BY favorites.id DESC");
     if($this->row_exists($res)) return $this->fetch_all($res);
     return false;
   }
-  public function isMp3ExistsFavorites(string $hash='',int $userid)
+  public function isMp3ExistsFavorites( $hash='', $userid)
   {
     $res = $this->select('favorites',"hash='$hash' AND user_id='$userid'");
     return $this->row_exists($res);
   }
-  public function addToFavoritesList(string $hash,int $userid)
+  public function addToFavoritesList( $hash, $userid)
   {
     if($this->isMp3ExistsFavorites($hash,$userid)) return false;
     return $this->insert('favorites',['user_id'=> $userid,'hash'=> $hash]);
   }
-  public function deleteFromFavoritesList(string $hash,int $userid)
+  public function deleteFromFavoritesList( $hash, $userid)
   {
     if(!$this->isMp3ExistsFavorites($hash,$userid)) return false;
     return $this->delete('favorites',"user_id ='$userid'AND hash = '$hash'");
   }
-  public function getMp3Info(string $hash='')
+  public function getMp3Info( $hash='')
   {
     $res = $this->select('sounds',"hash='$hash'");
     if($this->row_exists($res)) return $res->fetch_assoc();
@@ -231,13 +231,13 @@ class Database extends mysqli
     if($this->row_exists($res)) return $this->fetch_all($res);
     return false;
   }
-  public function getAlbumMusics(string $hash='')
+  public function getAlbumMusics( $hash='')
   {
     $res = $this->select('sounds',"album_id='$hash'");
     if($this->row_exists($res)) return $this->fetch_all($res);
     return false;
   }
-  public function getAlbumInfo(string $hash='')
+  public function getAlbumInfo( $hash='')
   {
     $res = $this->select('albums',"hash='$hash'");
     if($this->row_exists($res)) return $res->fetch_assoc();
@@ -249,7 +249,7 @@ class Database extends mysqli
     if($this->row_exists($res)) return $res->fetch_assoc();
     return false;
   }
-  public function getLastId(string $table='')
+  public function getLastId( $table='')
   {
     $res = $this->select($table,'','id');
     if($this->row_exists($res)) return $res->fetch_assoc()['id'];
@@ -261,13 +261,13 @@ class Database extends mysqli
     if($this->row_exists($res)) return $res->fetch_assoc();
     return false;
   }
-  public function getFisrtId(string $table='')
+  public function getFisrtId( $table='')
   {
     $res = $this->select($table,'id IS NOT NULL ORDER BY id DESC','id');
     if($this->row_exists($res)) return $res->fetch_assoc()['id'];
     return false;
   }
-  public function updateStep(int $userid,string $step)
+  public function updateStep( $userid, $step)
   {
     $res = $this->select('users',"user_id=$userid");
     if($this->row_exists($res)) return $this->update('users',['step'=> $step],"user_id=$userid");
@@ -285,13 +285,13 @@ class Database extends mysqli
     if($this->row_exists($res)) return $this->fetch_all($res);
     return false;
   }
-  public function getAdsByHash(string $hash='')
+  public function getAdsByHash( $hash='')
   {
     $res = $this->select('ads',"hash='$hash'");
     if($this->row_exists($res)) return $res->fetch_assoc();
     return false;
   }
-  public function deleteAds(string $hash='')
+  public function deleteAds( $hash='')
   {
     $res = $this->select('ads',"hash='$hash'");
     if($this->row_exists($res)) return $this->delete('ads',"hash='$hash'");
