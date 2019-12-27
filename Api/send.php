@@ -1,5 +1,6 @@
 <?php
 require_once('../funcs.php');
+use  http\Client\Request;
 
 $request = new \http\Client\Request();
 $request->getQuery();
