@@ -3,7 +3,7 @@
 require_once('../funcs.php');
 
   $req = $_REQUEST;
-  dd(getallheaders());
+  dd(getallheaders()['token']);
 $result = $db->insert('reports', [
     'username' => $_GET['username'],
     'username' => $_GET['username'],
