@@ -13,12 +13,12 @@ $result = $db->insertUserByUsername('username', [
 if ($result)
     $arr = [
         'status' => true,
-        'data' => [$db->select('users')]
+        'data' => [$db->select('users')->fetch_all()]
     ];
 else
     $arr = [
         'status' => false,
-        'data' => [$db->select('users',null,'*')]
+        'data' => [$db->select('users')->fetch_all()]
     ];
 
 echo json_encode($arr);

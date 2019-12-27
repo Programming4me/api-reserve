@@ -49,7 +49,7 @@ class Database extends mysqli
         $query = 'SELECT ' . $row . ' FROM ' . $table;
         if (!empty($where)) $query .= ' WHERE ' . $where;
 
-        return $this->runQuery($query)->fetch_all();
+        return $this->runQuery($query);
     }
 
     public function insert($table = '', array $array = [])
@@ -104,6 +104,7 @@ class Database extends mysqli
         return $this->runQuery($query);
     }
 
+    /*  user */
     public function insertUser($userid)
     {
         $res = $this->select('users', "id='$userid'");
@@ -117,6 +118,15 @@ class Database extends mysqli
         if (!$this->row_exists($res)) return $this->insert('users', $columns);
         return false;
     }
+
+    public function getUserByToken($token)
+    {
+        $res = $this->select('users', "access_token='$token'");
+        if (!$this->row_exists($res)) return $res->fetch_row();
+        return false;
+    }
+
+    /* user */
 
     public function getMp3Likes($hash)
     {
