@@ -18,7 +18,7 @@ if ($result)
 else
     $arr = [
         'status' => false,
-        'data' => [$db->select('users')]
+        'data' => [$db->select('users',null,'*')]
     ];
 
 echo json_encode($arr);
