@@ -14,7 +14,7 @@ $result = $db->insert('reports', [
 $arr = [
     'status' => true,
     'data' => [
-        'reserves' => $db->fetch_all($db->select('reports')->fetch_all())
+        'reserves' => $db->fetch_all($db->select('reports'))
     ],
     'message' => null
 ];
