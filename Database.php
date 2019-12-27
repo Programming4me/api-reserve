@@ -123,8 +123,7 @@ class Database extends mysqli
     public function getUserByToken($token)
     {
         $res = $this->select('users', "access_token='$token'",'id');
-        dd($res->fetch_row());
-        if (!$this->row_exists($res))  dd($res);//return $res->fetch_assoc();
+        if ($this->row_exists($res))  return $res->fetch_all();
         return false;
     }
 
