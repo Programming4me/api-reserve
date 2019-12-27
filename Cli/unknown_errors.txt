@@ -1,1 +1,0 @@
-500	INTERDC_4_CALL_ERROR	<class 'pyrogram.api.functions.messages.forward_messages.ForwardMessages'>
