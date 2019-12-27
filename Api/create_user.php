@@ -10,16 +10,16 @@ $result = $db->insertUserByUsername('username', [
 
 ]);
 
-if ($result)
-    $arr = [
-        'status' => true,
-        'data' => [$db->select('users')->fetch_assoc()],
-        'message' => getMessage('unique')
-    ];
-else
-    $arr = [
-        'status' => false,
-        'data' => [$db->select('users')->fetch_assoc()]
-    ];
+$arr = [
+    'status' => true,
+    'data' => [$db->select('users')->fetch_assoc()],
+];
+
+if ($result) $arr['status'] = true;
+
+else {
+    $arr['status'] = true;
+    $arr['message'] = getMessage('unique');
+}
 
 echo json_encode($arr);
