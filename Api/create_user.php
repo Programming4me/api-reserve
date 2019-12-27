@@ -18,7 +18,7 @@ $arr = [
 if ($result) $arr['status'] = true;
 
 else {
-    $arr['status'] = true;
+    $arr['status'] = false;
     $arr['message'] = getMessage('unique');
 }
 
