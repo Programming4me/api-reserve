@@ -8,6 +8,7 @@ $result = $db->insert('reports', [
     'user_id' => $user['id'],
     'start_time' => $_GET['start_time'],
     'end_time' => $_GET['end_time'],
+    'day' => $_GET['day'],
 ]);
 
 $arr = [
