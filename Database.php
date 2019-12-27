@@ -143,7 +143,7 @@ class Database extends mysqli
     {
         $user_id = $this->getUserByToken($token)['id'];
         $res = $this->select('users', "user_id='$user_id'");
-        if ($this->row_exists($res)) return $this->fetch_all($res);
+        if ($this->row_exists($res)) return $this->fetch_all($res->fetch_all());
         return false;
     }
 
