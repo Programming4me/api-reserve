@@ -18,7 +18,7 @@ if ($result)
 else
     $arr = [
         'status' => false,
-        'data' => [$db->select('users')->fetch_all()]
+        'data' => [$db->select('reports')->fetch_all()]
     ];
 
 echo json_encode($arr);
