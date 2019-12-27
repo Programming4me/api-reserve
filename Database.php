@@ -142,8 +142,8 @@ class Database extends mysqli
     public function getUserReportsByToken($token)
     {
         $user_id = $this->getUserByToken($token)['id'];
-        $res = $this->select('users', "user_id='$user_id'");
-        if ($this->row_exists($res)) return $this->fetch_all($res->fetch_all());
+        $res = $this->select('reports', "user_id='$user_id'");
+        if ($this->row_exists($res)) return $this->fetch_all($res);
         return false;
     }
 
