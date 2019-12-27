@@ -9,7 +9,7 @@
 set_time_limit(0);
 ini_set('max_execuation_time',9999999);
 error_reporting(0);
-require('db.php');
+require('Database.php');
 $args = ['localhost'=> 'localhost', 'username'=> 'hooshman_user', 'password'=> 'mahdi@0912', 'database'=> 'hooshman_test']; // اطلاعات مربوط به دیتابیس
 $db = new database($args);
 return $db;

@@ -6,7 +6,7 @@
 */
 
 
-class database extends mysqli
+class Database extends mysqli
 {
   public $errors=[];
   public function __construct($db=[])
