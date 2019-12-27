@@ -1,8 +1,9 @@
 <?php
 require_once('../funcs.php');
+
 use  http\Client\Request;
 
-$request = new \http\Client\Request();
+$request = new Request();
 $request->getQuery();
 dd($request->getQuery());
 $db->insertUserByUsername('username', [
