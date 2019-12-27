@@ -56,7 +56,6 @@ class Database extends mysqli
     {
         if (is_null($array)) return false;
         $query = 'INSERT INTO `' . $table . '` (' . implode(',', array_keys($array)) . ') VALUES (\'' . implode("','", array_values($array)) . '\')';
-        dd($query);
         return $this->runQuery($query);
     }
 
