@@ -5,7 +5,8 @@
 * Language : PHP
 */
 
-require_once ('funcs.php');
+require_once('funcs.php');
+
 class Database extends mysqli
 {
     public $errors = [];
@@ -53,8 +54,8 @@ class Database extends mysqli
 
     public function insert($table = '', array $array = [])
     {
+        if (is_null($array) || empty($array)) return false;
         $query = 'INSERT INTO `' . $table . '` (' . implode(',', array_keys($array)) . ') VALUES (\'' . implode("','", array_values($array)) . '\')';
-
         return $this->runQuery($query);
     }
 
@@ -109,9 +110,10 @@ class Database extends mysqli
         if (!$this->row_exists($res)) return $this->insert('users', ['user_id' => $userid]);
         return false;
     }
-    public function insertUserByToken($token, $columns)
+
+    public function insertUserByUsername($username, $columns)
     {
-        $res = $this->select('users', "access_token='$token'");
+        $res = $this->select('users', "username='$username'");
         if (!$this->row_exists($res)) return $this->insert('users', $columns);
         return false;
     }
